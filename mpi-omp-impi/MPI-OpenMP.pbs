@@ -1,0 +1,30 @@
+#!/bin/bash
+# This is a template hybrid MPI/OpenMP job
+#PBS -N MPI_OpenMP
+
+# You should use a project id, either the 8 digit code 
+# of your project or "Personal"
+#PBS -P Personal
+
+# This following resource request is for two chunks
+# Each chunk has 24 physical cpu cores
+# Each chunk has 2 MPI process
+# There are 4 MPI processes in total
+# Each MPI process has 12 OpenMP threads
+# Each chunk also requests 64GB of memory
+# 2 x (2 MPI x 12 OpenMP + 64GB)
+#PBS -l select=2:ncpus=24:mpiprocs=2:ompthreads=12:mem=64gb
+
+# Ask for the required elapsed time
+#PBS -l walltime=0:10:00
+
+# This option merges standard output and standard error in the same file
+#PBS -j oe
+
+# Load any modules which are not in your login profile
+# These modules load the Intel compiler and Intel MPI
+module load intelcc intelmpi
+
+# Change directory
+cd "$PBS_O_WORKDIR"
+mpirun ./MPI-OpenMP.x
