@@ -6,3 +6,4 @@ Directory     | Description
 ------------- | -------------
 mpi-impi      | Intel MPI
 mpi-omp-impi  | Intel MPI with OpenMP threading
+array         | Job Array
